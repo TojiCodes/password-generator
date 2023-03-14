@@ -7,7 +7,7 @@ var upperCasedCharacters = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
 var specialCharacters = ['@','%','+','\\','/',"'",'!','#','$','^','?',':',',',')','(','}','{',']','[','~','-','_','.'];
 
 // An empty array that will receive input from other variables
-var answersCart = [];
+var answerCart = [];
 
 // Write password to the #password input
 function writePassword() {
@@ -23,15 +23,15 @@ generateBtn.addEventListener("click", writePassword);
 
 function randomInt(min, max){
   if (!max){
-    max=min
-    min= 0
+    max=min;
+    min= 0;
   }
-  var rand = Math.random()
-  return Math.floor (min*(1-rand) + rand*max)
+  var rand = Math.random();
+  return Math.floor (min*(1-rand) + rand*max);
   };
   
   function getRandomItem (list){
-    return list[randomInt(list.length)]
+    return list[randomInt(list.length)];
   }
 
 function generatePassword () {
@@ -40,14 +40,14 @@ function generatePassword () {
 
 // If input for password length is not a number, it will return this window alert
     if (isNaN(passwordLength)){
-      window.alert("Not a number")
+      window.alert("Not a number");
+      return "";
     }
 // If input doesn't meet required length, alert user
     else if (passwordLength < 8 || passwordLength > 128) {
-      window.alert ("Invalid password length")
-    } else {
-      
-    }
+      window.alert ("Invalid password length");
+      return "";
+} 
   
     // if (!passwordLength) return "No Password";
 
@@ -71,27 +71,30 @@ var uppercaseQuestion = window.confirm("Include Uppercase letters?")
 var symbolsQuestion= window.confirm("Include symbols?")
 
 if (includeNumbers === true) {
+    answerCart.push(numericCharacters);
     // allCharacters = allCharacters.concat(numericCharacters);
-
-// If the user wants to include number, push numeric characters list into answers cart
-answersCart.push(numericCharacters)
 }
+
 if (lowercaseQuestion === true) {
-    answersCart.push(lowerCasedCharacters)
+    answerCart.push(lowerCasedCharacters);
+    // allCharacters = allCharacters.concat(lowerCasedCharacters);
 }
 
 if (uppercaseQuestion === true) {
-    answersCart.push(upperCasedCharacters)
+    answerCart.push(upperCasedCharacters);
+    // allCharacters = allCharacters.concat(upperCasedCharacters);
 }
 
 if (symbolsQuestion === true) {
-    answersCart.push(specialCharacters)
+    answerCart.push(specialCharacters);
+    // allCharacters = allCharacters.concat(specialCharacters);
 }
 
 // If the user selects no for every prompt, it automatically makes password all lowercase letters
-if (answersCart.length === 0) {
-  answersCart.push(lowerCasedCharacters)
+if (allCharacters.length === 0) {
+  allCharacters = lowerCasedCharacters;
 }
+
 
 console.log(allCharacters);
 
@@ -100,7 +103,7 @@ var generatedPassword = ""
 for(var i = 0; i < passwordLength; i++) {
 
 // This is grabbing a list of randomly selected variables from the answerCart array
-var randomList = getRandomItem(answersCart)
+var randomList = getRandomItem(answerCart)
 
 // This is grabbing a random character from the randomized lists created above
 var randomCharacter = getRandomItem(randomList)
